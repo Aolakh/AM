@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="AM\AffiliateMember\Api\Data\AffiliateInterface" type="AM\AffiliateMember\Model\AffiliateItems" />
+    <preference for="AM\AffiliateMember\Api\AffiliateRepositoryInterface" type="AM\AffiliateMember\Model\AffiliateRepository" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="affiliatemembers_listing_data_source" xsi:type="string">AM\AffiliateMember\Model\ResourceModel\AffiliateMembers\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="AM\AffiliateMember\Model\ResourceModel\AffiliateMembers\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">affiliate_members</argument>
+            <argument name="resourceModel" xsi:type="string">AM\AffiliateMember\Model\ResourceModel\AffiliateMembers</argument>
+        </arguments>
+    </type>
+    <virtualType name="PostGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">AM\AffiliateMember\Model\ResourceModel\AffiliateMembers\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">AffiliatePostGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AffiliatePostGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+</config>
