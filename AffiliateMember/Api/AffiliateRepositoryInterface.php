@@ -8,11 +8,5 @@ interface AffiliateRepositoryInterface
     /**
      * @return \AM\AffiliateMember\Api\Data\AffiliateInterface[]
      **/
-    public function getList();
-
-    /**
-     * @param \Magento\Framework\Api\SearchCriteriaInterface $searchCriteria
-     * @return \AM\AffiliateMember\Api\Data\AffiliateInterface[]
-     */
-    public function getMemberList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria);
+    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = NULL);
 }
