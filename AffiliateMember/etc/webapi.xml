@@ -6,11 +6,4 @@
             <resource ref="anonymous"/>
         </resources>
     </route>
-
-    <route url="/V1/searchaffiliatemembers" method="GET">
-        <service class="AM\AffiliateMember\Api\AffiliateRepositoryInterface" method="getMemberList"/>
-        <resources>
-            <resource ref="anonymous"/>
-        </resources>
-    </route>
 </routes>
