@@ -14,15 +14,13 @@ class AffiliateRepository implements AffiliateRepositoryInterface
         $this->collectioFactory = $collectioFactory;
     }
 
-    public function getList()
+    public function getList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria = NULL)
     {
-        return $this->collectioFactory->create()->getItems();
-    }
-
-    public function getMemberList(\Magento\Framework\Api\SearchCriteriaInterface $searchCriteria)
-    {
-        if($searchCriteria->getFilterGroups()){
-            return $this->collectioFactory->create()->getItemsByColumnValue($searchCriteria->getFilterGroups()[0]->getFilters()[0]->getField(),$searchCriteria->getFilterGroups()[0]->getFilters()[0]->getValue());
+        if($searchCriteria){
+            if($searchCriteria->getFilterGroups()){
+                return $this->collectioFactory->create()->getItemsByColumnValue($searchCriteria->getFilterGroups()[0]->getFilters()[0]->getField(),$searchCriteria->getFilterGroups()[0]->getFilters()[0]->getValue());
+            }
         }
+        return $this->collectioFactory->create()->getItems();
     }
 }
